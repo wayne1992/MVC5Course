@@ -94,6 +94,10 @@ namespace MVC5Course.Controllers
         {
             var c = db.Product.Find(id);
 
+            if (c == null) {
+                return HttpNotFound();
+            }
+
             db.Product.Remove(c);
             db.SaveChanges();
 
