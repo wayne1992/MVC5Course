@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
+using Omu.ValueInjecter;
 
 namespace MVC5Course.Controllers
 {
@@ -59,6 +60,42 @@ namespace MVC5Course.Controllers
             };
             this.db.Product.Add(product);
             this.db.SaveChanges();
+
+            return RedirectToAction("Index2");
+        }
+
+        public ActionResult EdiotOne( int id)
+        {
+            var data = db.Product.Find(id);
+
+            return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult EdiotOne(int id, ProductViewModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(data);
+            }
+            var one = db.Product.Find(id);
+            //要先輸入Mapping點燈泡引用命名空間using Omu.ValueInjecter;
+            one.InjectFrom(data);
+            //one.ProductName = data.ProductName;
+            //one.Price = data.Price;
+            //one.Stock = data.Stock;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index2");
+        }
+
+        public ActionResult DeleteOne( int id)
+        {
+            var c = db.Product.Find(id);
+
+            db.Product.Remove(c);
+            db.SaveChanges();
 
             return RedirectToAction("Index2");
         }
