@@ -1,12 +1,20 @@
 namespace MVC5Course.Models
 {
+    using MVC5Course.Models.inputValidate; //引用自己寫的驗證
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     
     [MetadataType(typeof(ClientMetaData))]
-    public partial class Client
+    public partial class Client : IValidatableObject
     {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (this.DateOfBirth.Value.Year > 1980 && this.City == "Taipei")
+            {
+                yield return new ValidationResult("條件錯誤", new string[] { "DateOfBirth", "City" });
+            }
+        }
     }
     
     public partial class ClientMetaData
@@ -49,7 +57,8 @@ namespace MVC5Course.Models
         public Nullable<double> Longitude { get; set; }
         public Nullable<double> Latitude { get; set; }
         public string Notes { get; set; }
-    
+        [身份證字號]
+        public string idNumber { get; set; }
         public virtual Occupation Occupation { get; set; }
         public virtual ICollection<Order> Order { get; set; }
     }
