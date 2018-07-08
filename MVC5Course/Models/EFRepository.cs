@@ -39,7 +39,7 @@ namespace MVC5Course.Models
 
 		public virtual void Delete(T entity)
 		{
-			ObjectSet.Remove(entity);
+            ObjectSet.Remove(entity);
 		}
 
 	}

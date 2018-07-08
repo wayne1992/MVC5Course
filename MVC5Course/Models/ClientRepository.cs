@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-	
+
 namespace MVC5Course.Models
 {   
 	public  class ClientRepository : EFRepository<Client>, IClientRepository
@@ -18,6 +18,16 @@ namespace MVC5Course.Models
 
         public Client Find(int id) {
             return this.All().FirstOrDefault(p => p.ClientId == id);
+        }
+
+        public override void Delete(Client client) {
+
+            client.Is_del = 1;
+        }
+       
+        public override IQueryable<Client> All() {
+
+            return base.All().Where(p => p.Is_del == null); ;
         }
 	}
 
