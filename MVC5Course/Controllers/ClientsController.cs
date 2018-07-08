@@ -52,6 +52,24 @@ namespace MVC5Course.Controllers
             return View(client);
         }
 
+        //cathALL範例
+        //http://www.nexcom.com
+        [Route("{*name}")]
+        public ActionResult Details2(string name)
+        {
+            string[] names = name.Split('/');
+            string FirstName = names[0];
+            string MiddleName = names[1];
+            string LastName = names[2];
+            Client client = repo.All().FirstOrDefault(p => p.FirstName == FirstName && p.MiddleName == MiddleName && p.LastName == LastName);
+
+            if (client == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Details", client);
+        }
+
         // GET: Clients/Create
         [Route("create")]
         public ActionResult Create()
