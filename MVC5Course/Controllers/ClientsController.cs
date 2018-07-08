@@ -11,11 +11,10 @@ using MVC5Course.Models;
 namespace MVC5Course.Controllers
 {
     [RoutePrefix("Client1")]
-    public class ClientsController : Controller
+    public class ClientsController : BaseController
     {
         //private FabricsEntities db = new FabricsEntities();
-        ClientRepository repo;
-        OccupationRepository occuRepo;
+        
 
         public ClientsController() {
             repo = RepositoryHelper.GetClientRepository();
@@ -28,7 +27,7 @@ namespace MVC5Course.Controllers
             var client = repo.All();
             return View(client.Take(10).ToList());
         }
-        [Route("search")]
+        [Route("search.php")]
         public ActionResult Search(string Keyword)
         {
             var client = repo.SearchName(Keyword);

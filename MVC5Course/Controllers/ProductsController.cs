@@ -11,9 +11,9 @@ using Omu.ValueInjecter;
 
 namespace MVC5Course.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
-        private FabricsEntities db = new FabricsEntities();
+        
 
         // GET: Products
         public ActionResult Index()
