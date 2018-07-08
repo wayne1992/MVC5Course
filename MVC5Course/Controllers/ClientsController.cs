@@ -13,9 +13,13 @@ namespace MVC5Course.Controllers
     public class ClientsController : Controller
     {
         //private FabricsEntities db = new FabricsEntities();
-        ClientRepository repo = RepositoryHelper.GetClientRepository();
-        OccupationRepository occuRepo = RepositoryHelper.GetOccupationRepository();
+        ClientRepository repo;
+        OccupationRepository occuRepo;
 
+        public ClientsController() {
+            repo = RepositoryHelper.GetClientRepository();
+            occuRepo = RepositoryHelper.GetOccupationRepository(repo.UnitOfWork);
+        }
         // GET: Clients
         public ActionResult Index()
         {
