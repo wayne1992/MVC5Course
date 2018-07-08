@@ -21,6 +21,17 @@ namespace MVC5Course.Controllers
             return View(client.Take(10).ToList());
         }
 
+        public ActionResult Search(string Keyword)
+        {
+            var client = db.Client.AsQueryable();
+            if (!String.IsNullOrEmpty(Keyword))
+            {
+                client = client.Where(p => p.FirstName.Contains(Keyword));
+            }
+
+            return View("Index", client);
+        }
+
         // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {
@@ -93,7 +104,7 @@ namespace MVC5Course.Controllers
             ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }
-
+       
         // GET: Clients/Delete/5
         public ActionResult Delete(int? id)
         {
