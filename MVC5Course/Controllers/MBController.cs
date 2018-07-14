@@ -26,6 +26,8 @@ namespace MVC5Course.Controllers
         {
             ViewData["Text"] = "hi";
 
+            ViewData["Client"] = db.Client.Take(5).ToList();
+
             return View();
         }
 

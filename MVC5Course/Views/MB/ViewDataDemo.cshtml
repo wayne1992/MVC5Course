@@ -1,9 +1,16 @@
 ﻿
 @{
     ViewBag.Title = "ViewDataDemo";
+    var data = ViewData["Client"] as List<MVC5Course.Models.Client>;
 }
 
 <h2>ViewDataDemo : @ViewData["Text"]</h2>
 
 <h2>ViewDataDemo : @ViewBag.Text</h2>
 
+<ul>
+    @foreach (var item in data)
+    {
+        <li>@item.FirstName</li>
+    }
+</ul>
