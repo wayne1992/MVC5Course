@@ -17,9 +17,10 @@ namespace MVC5Course.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
+            //throw new AggregateException("Error");
             return View();
         }
-
+        [LocalOnly]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
