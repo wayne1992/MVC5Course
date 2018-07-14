@@ -8,6 +8,11 @@ namespace MVC5Course.Models
     [MetadataType(typeof(ClientMetaData))]
     public partial class Client : IValidatableObject
     {
+        partial void Init()
+        {
+            this.City = "新北市";
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             //使用id值是否為0來區分新增或修改
