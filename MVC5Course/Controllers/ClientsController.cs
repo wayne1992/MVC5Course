@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -27,6 +28,42 @@ namespace MVC5Course.Controllers
             var client = repo.All();
             return View(client.Take(10).ToList());
         }
+        [HttpPost]
+        [Route("BatchUpdate")]
+        public ActionResult BatchUpdate( ClientBatchVM[] data)
+        {
+            if (ModelState.IsValid) {
+                foreach (var vm in data)
+                {
+                    var Client = repo.Find(vm.ClientId);
+                    Client.FirstName = vm.FirstName;
+                    Client.MiddleName = vm.MiddleName;
+                    Client.LastName = vm.LastName;
+                }
+                
+                try {
+                    repo.UnitOfWork.Commit();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    List<string> errors = new List<string>();
+                    foreach (var vError in ex.EntityValidationErrors)
+                    {
+                        foreach (var err in vError.ValidationErrors)
+                        {
+                            errors.Add(err.PropertyName + ':' + err.ErrorMessage);
+                        }
+                    }
+                    return Content(String.Join(",", errors.ToArray()));
+                }
+                return RedirectToAction("Index");
+            }
+
+            ViewData.Model = repo.All().Take(10);
+
+            return View("Index");
+        }
+
         [Route("search.php")]
         public ActionResult Search(string Keyword)
         {

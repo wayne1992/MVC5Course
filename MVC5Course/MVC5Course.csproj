@@ -165,6 +165,7 @@
     <Compile Include="Models\Client.Partial.cs">
       <DependentUpon>EFGeneratePartialClass.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClientBatchVM.cs" />
     <Compile Include="Models\ClientRepository.cs">
       <DependentUpon>IRepository.tt</DependentUpon>
     </Compile>
