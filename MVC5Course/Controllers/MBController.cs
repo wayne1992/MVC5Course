@@ -43,5 +43,12 @@ namespace MVC5Course.Controllers
 
             return View();
         }
+
+        public ActionResult MBinding(string name)
+        {
+
+            return View(name);
+        }
+
     }
 }
