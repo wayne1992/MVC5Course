@@ -13,7 +13,7 @@ namespace MVC5Course.Models
         [Required]
         public string FirstName { get; set; }
 
-        [Required]
+        //[Required]
         public string MiddleName { get; set; }
 
         [Required]
