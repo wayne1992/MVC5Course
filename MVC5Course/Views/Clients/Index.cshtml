@@ -11,7 +11,8 @@
 </p>
 @using (Html.BeginForm("Search", "Clients", FormMethod.Get, null))
 {
-    @Html.TextBox("Keyword", null, new { placeholder = "請輸入名稱" });
+    @Html.DropDownList("CreditRating", null, "--請選擇--", new { @class = "form-control" })
+    @Html.TextBox("Keyword", null, new { placeholder = "請輸入名稱" })
 
     <input type="submit" value="送出" class="btn btn-default" />
 

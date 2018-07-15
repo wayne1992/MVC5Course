@@ -6,12 +6,16 @@ namespace MVC5Course.Models
 {   
 	public  class ClientRepository : EFRepository<Client>, IClientRepository
 	{
-        public IQueryable<Client> SearchName(string Keyword) {
+        public IQueryable<Client> SearchName(string Keyword, string CreditRating) {
 
             var client = this.All();
             if (!String.IsNullOrEmpty(Keyword))
             {
                 client = client.Where(p => p.FirstName.Contains(Keyword));
+            }
+            if (!String.IsNullOrEmpty(CreditRating))
+            {
+                client = client.Where(p => p.CreditRating.ToString() == CreditRating);
             }
             return client;
         }

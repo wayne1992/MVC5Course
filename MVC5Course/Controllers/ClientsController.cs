@@ -26,6 +26,17 @@ namespace MVC5Course.Controllers
         public ActionResult Index()
         {
             var client = repo.All();
+
+            var items = (from p in client select p.CreditRating)
+                .Distinct()
+                .OrderBy(p => p)
+                .Select(p => new SelectListItem
+                {
+                    Text = p.Value.ToString(),
+                    Value = p.Value.ToString()
+                });
+            ViewBag.CreditRating = new SelectList(items, "Value", "Text");
+
             return View(client.Take(10).ToList());
         }
         [HttpPost]
@@ -52,10 +63,20 @@ namespace MVC5Course.Controllers
             return View("Index");
         }
 
-        [Route("search.php")]
-        public ActionResult Search(string Keyword)
+        [Route("search")]
+        public ActionResult Search(string Keyword , string CreditRating)
         {
-            var client = repo.SearchName(Keyword);
+            var client = repo.SearchName(Keyword, CreditRating);
+
+            var items = (from p in repo.All() select p.CreditRating)
+                .Distinct()
+                .OrderBy(p => p)
+                .Select(p => new SelectListItem
+                {
+                    Text = p.Value.ToString(),
+                    Value = p.Value.ToString()
+                });
+            ViewBag.CreditRating = new SelectList(items, "Value", "Text");
 
             return View("Index", client);
         }
