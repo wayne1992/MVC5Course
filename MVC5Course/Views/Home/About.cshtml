@@ -5,3 +5,15 @@
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+@Model
+@ViewData.ModelState["id"].Value.AttemptedValue
+@{ var routeValues = ViewContext.RouteData.Values; }
+@routeValues["id"].ToString()
+@HttpContext.Current.Items
+
+
+@ViewContext.ViewData.Model
+@ViewContext.ViewData.ModelState["id"].Value.AttemptedValue
+@ViewContext.RouteData.Values["action"].ToString()
+@ViewContext.HttpContext.Items
