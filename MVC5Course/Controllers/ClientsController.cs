@@ -68,12 +68,21 @@ namespace MVC5Course.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Client client = repo.Find(id.Value);
             if (client == null)
             {
                 return HttpNotFound();
             }
             return View(client);
+        }
+
+        [Route("{id}/orders")]
+        [ChildActionOnly]//限定由頁面呼叫存取
+        public ActionResult Details_OrderList(int id)
+        {
+            ViewData.Model = repo.Find(id).Order.Take(3).ToList();
+            return PartialView("OrderList");
         }
 
         //cathALL範例
