@@ -333,11 +333,12 @@
     <Content Include="Views\MB\ViewDataDemo.cshtml" />
     <Content Include="Views\Shared\Error_DbEntityValidationException.cshtml" />
     <Content Include="Views\Razor\Index.cshtml" />
+    <Content Include="Views\Razor\page1.cshtml" />
+    <Content Include="Views\Razor\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\M\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
