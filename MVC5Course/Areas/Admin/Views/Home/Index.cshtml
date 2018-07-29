@@ -5,3 +5,8 @@
 
 <h2>Admin Index</h2>
 
+<script>
+    console.log('@Html.Raw(ViewBag.msg)'); // 容易遭受攻擊
+
+    cinsole.log('@Ajax.JavaScriptStringEncode(ViewBag.msg)'); // 安全的字串
+</script>
